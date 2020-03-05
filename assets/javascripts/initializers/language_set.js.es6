@@ -39,11 +39,11 @@ function initialize(api) {
   api.createWidget("lang-default", {
     tagName: 'div.lang_default',
     
-    html(){
+    html(attrs,state){
       return h("span.set_span","中文");
     },
-    click(){
-      console.log("click")
+    click(e){
+      e.preventDefault();
       this.sendWidgetAction("toggleLangList");
     }
 
@@ -63,6 +63,9 @@ function initialize(api) {
    
     },
 
+    clickOutside(e) {
+        this.sendWidgetAction("toggleLangList");
+    },
     
 
   })
@@ -84,13 +87,7 @@ function initialize(api) {
       this.state.langListVisible = !this.state.langListVisible;
       console.log("toggleLangList 后 " +this.state.langListVisible)
     },
-    closeLangList(){
-      this.state.langListVisible = false;
-    },
 
-    clickOutside(e) {
-      this.sendWidgetAction("closeLangList");
-    },
     
     html(attrs, state){
 
