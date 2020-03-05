@@ -108,7 +108,7 @@ function initialize(api) {
 
   api.createWidget('increment-button', {
     tagName: 'button',
-
+    buildKey: () => `button`,
     defaultState() {
       return { clicks: 0 };
     },
