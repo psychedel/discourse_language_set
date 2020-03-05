@@ -39,7 +39,7 @@ function initialize(api) {
   })
 
   api.createWidget("lang-default", {
-    tagName: 'span.lang_default',
+    tagName: 'div.lang_default',
     buildKey: () => `lang_default`,
 
 
