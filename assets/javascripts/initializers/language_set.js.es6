@@ -114,11 +114,15 @@ function initialize(api) {
     },
 
     html(attrs, state) { 
+      console.log("html this,click ="+this.state.clicks)
+      console.log("html click ="+state.clicks)
       return `Click me! ${state.clicks} clicks`;
     },
 
     click() {
+      console.log("点击前 click ="+this.state.clicks)
       this.state.clicks++;
+      console.log("点击后 click ="+this.state.clicks)
     }
   });
 
