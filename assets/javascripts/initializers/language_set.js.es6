@@ -63,9 +63,7 @@ function initialize(api) {
    
     },
 
-    clickOutside(e) {
-      this.sendWidgetAction("toggleLangList");
-    },
+    
 
   })
 
@@ -85,6 +83,13 @@ function initialize(api) {
       console.log("toggleLangList 前 " +this.state.langListVisible)
       this.state.langListVisible = !this.state.langListVisible;
       console.log("toggleLangList 后 " +this.state.langListVisible)
+    },
+    closeLangList(){
+      this.state.langListVisible = false;
+    },
+
+    clickOutside(e) {
+      this.sendWidgetAction("toggleLangList");
     },
     
     html(attrs, state){
