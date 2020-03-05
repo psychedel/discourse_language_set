@@ -46,10 +46,11 @@ function initialize(api) {
   })
 
   api.createWidget("lang-list-div", {
+
     html(attrs, state){
 
-      console.log(state)
-      if(state.langListVisible){
+      console.log(attrs)
+      if(attrs.langListVisible){
         var html = []
         const langs = JSON.parse(Discourse.SiteSettings.available_locales)
         langs.map(v =>{
@@ -60,8 +61,6 @@ function initialize(api) {
       }else{
         return [];
       }
-      
-
     },
 
     clickOutside(e) {
