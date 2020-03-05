@@ -40,7 +40,7 @@ function initialize(api) {
       return h("span.set_span","中文");
     },
     click(){
-      this.sendWidgetAction("toggleLangList");
+      this.sendWidgetAction("openLangList");
     }
 
   })
@@ -48,19 +48,14 @@ function initialize(api) {
   api.createWidget("lang-list-div", {
 
     html(attrs, state){
-
-      console.log(attrs)
-      if(attrs.langListVisible){
-        var html = []
-        const langs = JSON.parse(Discourse.SiteSettings.available_locales)
-        langs.map(v =>{
-          var item = this.attach('lang-list',v);
-          html.push(item) 
-        })
-        return h("ul.select-kit-collection.set_ul.menu-panel",html);
-      }else{
-        return [];
-      }
+      var html = []
+      const langs = JSON.parse(Discourse.SiteSettings.available_locales)
+      langs.map(v =>{
+        var item = this.attach('lang-list',v);
+        html.push(item) 
+      })
+      return h("ul.select-kit-collection.set_ul.menu-panel",html);
+   
     },
 
     
@@ -74,6 +69,11 @@ function initialize(api) {
       };
       return states;
     },
+    openLangList(){
+      console.log("修改前langListVisible = "+ this.state.langListVisible)
+      this.state.langListVisible = true;
+      console.log("修改后langListVisible = "+ this.state.langListVisible)
+    }
 
     toggleLangList(){
       console.log("toggleLangList")
@@ -81,30 +81,23 @@ function initialize(api) {
       this.state.langListVisible = !this.state.langListVisible;
       console.log("修改后langListVisible = "+ this.state.langListVisible)
       this.toggleBodyScrolling(this.state.langListVisible);
-    }
-    ,
-    toggleBodyScrolling(bool) {
-      if (bool) {
-        document.body.addEventListener("touchmove", this.preventDefault, {
-          passive: false
-        });
-      } else {
-        document.body.removeEventListener("touchmove", this.preventDefault, {
-          passive: false
-        });
-      }
     },
+   
     clickOutside(e) {
       console.log("clickOutside")
-      this.sendWidgetAction("toggleLangList");
+      this.sendWidgetAction("openLangList");
     },
     html(attrs, state){
       console.log("this.state.langListVisible = "+ this.state.langListVisible)
       console.log("state.langListVisible = "+ state.langListVisible)
-      return h("div.select-kit.combo-box.set_div",
-        [this.attach('lang-default',{langListVisible:state.langListVisible}) ,
-        this.attach('lang-list-div',{langListVisible:state.langListVisible})]
-      );
+
+      const panels = [this.attach('lang-default',{langListVisible:state.langListVisible})];
+      if(state.langListVisible){
+      panels.push(
+        this.attach('lang-list-div',{langListVisible:state.langListVisible})
+      )}
+
+      return h("div.select-kit.combo-box.set_div",panels);
     },
 
   })
