@@ -80,9 +80,20 @@ function initialize(api) {
       console.log("修改前langListVisible = "+ this.state.langListVisible)
       this.state.langListVisible = !this.state.langListVisible;
       console.log("修改后langListVisible = "+ this.state.langListVisible)
-      this.toggleBodyScrolling(this.state.userVisible);
+      this.toggleBodyScrolling(this.state.langListVisible);
     }
     ,
+    toggleBodyScrolling(bool) {
+      if (bool) {
+        document.body.addEventListener("touchmove", this.preventDefault, {
+          passive: false
+        });
+      } else {
+        document.body.removeEventListener("touchmove", this.preventDefault, {
+          passive: false
+        });
+      }
+    },
     clickOutside(e) {
       console.log("clickOutside")
       this.sendWidgetAction("toggleLangList");
