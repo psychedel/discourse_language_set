@@ -74,7 +74,7 @@ function initialize(api) {
       this.state.langListVisible = true;
       console.log("修改后langListVisible = "+ this.state.langListVisible)
     }
-
+,
     toggleLangList(){
       console.log("toggleLangList")
       console.log("修改前langListVisible = "+ this.state.langListVisible)
