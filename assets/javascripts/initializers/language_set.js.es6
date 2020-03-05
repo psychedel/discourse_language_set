@@ -85,7 +85,7 @@ function initialize(api) {
    
     clickOutside(e) {
       console.log("clickOutside")
-      this.sendWidgetAction("openLangList");
+      this.openLangList();
     },
     html(attrs, state){
       console.log("this.state.langListVisible = "+ this.state.langListVisible)
