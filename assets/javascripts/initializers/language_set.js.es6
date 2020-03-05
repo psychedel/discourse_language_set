@@ -47,6 +47,8 @@ function initialize(api) {
 
   api.createWidget("lang-list-div", {
     html(attrs, state){
+
+      console.log(state)
       if(state.langListVisible){
         var html = []
         const langs = JSON.parse(Discourse.SiteSettings.available_locales)
@@ -81,12 +83,13 @@ function initialize(api) {
     html(){
 
       return h("div.select-kit.combo-box.set_div",
-        [this.attach('lang-default') ,
-        this.attach('lang-list-div')]
+        [this.attach('lang-default',{langListVisible:state.langListVisible}) ,
+        this.attach('lang-list-div',{langListVisible:state.langListVisible})]
       );
     },
 
     toggleLangList(){
+      alert("toggleLangList")
       this.state.langListVisible = !this.state.langListVisible;
     }
 
