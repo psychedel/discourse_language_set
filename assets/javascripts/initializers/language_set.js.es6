@@ -83,7 +83,7 @@ function initialize(api) {
       this.toggleBodyScrolling(this.state.langListVisible);
     },
    
-    clickOutside(e) {
+    click(e) {
       console.log("clickOutside")
       this.openLangList();
     },
@@ -106,7 +106,7 @@ function initialize(api) {
 
 
 
-  createWidget('increment-button', {
+  api.createWidget('increment-button', {
     tagName: 'button',
 
     defaultState() {
