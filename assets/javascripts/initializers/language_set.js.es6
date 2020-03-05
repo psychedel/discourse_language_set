@@ -44,8 +44,7 @@ function initialize(api) {
     html(){
       return h("span.set_span","中文");
     },
-    click(e){
-      e.preventDefault();
+    click(){
       this.sendWidgetAction("toggleLangList");
     }
 
@@ -65,7 +64,9 @@ function initialize(api) {
    
     },
 
-    
+    clickOutside(e) {
+      this.sendWidgetAction("toggleLangList");
+    },
 
   })
 
@@ -83,10 +84,7 @@ function initialize(api) {
     toggleLangList(){
       this.state.langListVisible = !this.state.langListVisible;
     },
-   
-    clickOutside(e) {
-      this.sendWidgetAction("toggleLangList");
-    },
+    
     html(attrs, state){
       const panels = [this.attach('lang-default',{langListVisible:state.langListVisible})];
       if(state.langListVisible){
