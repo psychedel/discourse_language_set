@@ -12,6 +12,9 @@ function initialize(api) {
   var username = currentUser.get("username");
 
   api.createWidget("lang-list", {
+    tagName: 'li.lang_list',
+    buildKey: () => `lang_list`,
+
     html(attrs){
       return h("li",{className:"set_li select-kit-row",lang:attrs.value},attrs.name);
     },
@@ -36,17 +39,22 @@ function initialize(api) {
   })
 
   api.createWidget("lang-default", {
+    tagName: 'span.lang_default',
+    buildKey: () => `lang_default`,
+
+
     html(){
       return h("span.set_span","中文");
     },
     click(){
-      this.sendWidgetAction("openLangList");
+      this.sendWidgetAction("toggleLangList");
     }
 
   })
 
   api.createWidget("lang-list-div", {
-
+    tagName: 'div.lang_list_div',
+    buildKey: () => `lang_list_div`,
     html(attrs, state){
       var html = []
       const langs = JSON.parse(Discourse.SiteSettings.available_locales)
@@ -63,18 +71,16 @@ function initialize(api) {
   })
 
   api.createWidget("lang-set", {
+    tagName: 'div.lang_set',
+    buildKey: () => `lang_set`,
+
     defaultState() {
       let states = {
         langListVisible: false
       };
       return states;
     },
-    openLangList(){
-      console.log("修改前langListVisible = "+ this.state.langListVisible)
-      this.state.langListVisible = true;
-      console.log("修改后langListVisible = "+ this.state.langListVisible)
-    }
-,
+
     toggleLangList(){
       console.log("toggleLangList")
       console.log("修改前langListVisible = "+ this.state.langListVisible)
@@ -83,9 +89,9 @@ function initialize(api) {
       this.toggleBodyScrolling(this.state.langListVisible);
     },
    
-    click(e) {
+    clickOutside(e) {
       console.log("clickOutside")
-      this.openLangList();
+      this.toggleLangList();
     },
     html(attrs, state){
       console.log("this.state.langListVisible = "+ this.state.langListVisible)
@@ -102,36 +108,8 @@ function initialize(api) {
 
   })
 
-
-
-
-
-  api.createWidget('increment-button', {
-    tagName: 'button',
-    buildKey: () => `button`,
-    defaultState() {
-      return { clicks: 0 };
-    },
-
-    html(attrs, state) { 
-      console.log("html this,click ="+this.state.clicks)
-      console.log("html click ="+state.clicks)
-      return `Click me! ${state.clicks} clicks`;
-    },
-
-    click() {
-      console.log("点击前 click ="+this.state.clicks)
-      this.state.clicks++;
-      console.log("点击后 click ="+this.state.clicks)
-    }
-  });
-
-
-
   api.decorateWidget("header-buttons:before", helper => {
-    //return helper.attach("lang-set");
-    return helper.attach("increment-button");
-
+    return helper.attach("lang-set");
   });
 }
 export default {
