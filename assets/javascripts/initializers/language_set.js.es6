@@ -64,7 +64,6 @@ function initialize(api) {
     },
 
     clickOutside(e) {
-      alert("clickOutside")
       console.log("clickOutside")
       this.sendWidgetAction("toggleLangList");
     }
@@ -88,7 +87,7 @@ function initialize(api) {
     },
 
     toggleLangList(){
-      alert("toggleLangList")
+      console.log("toggleLangList")
       this.state.langListVisible = !this.state.langListVisible;
     }
 
