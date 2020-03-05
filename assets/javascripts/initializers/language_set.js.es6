@@ -16,8 +16,6 @@ function initialize(api) {
       return h("li",{className:"set_li select-kit-row",lang:attrs.value},attrs.name);
     },
     click(event){
-      
-       alert(this.attrs.value)
        ajax("/u/" + username + ".json", {
             type: "PUT",
             data: {
@@ -47,18 +45,52 @@ function initialize(api) {
 
   })
 
+  api.createWidget("lang-list-div", {
+    html(){
+      
+      var html = []
+      const langs = JSON.parse(Discourse.SiteSettings.available_locales)
+      langs.map(v =>{
+        var item = helper.attach('lang-list',v);
+        html.push(item) 
+      })
+      return h("ul.select-kit-collection.set_ul.menu-panel",html);
+
+    },
+
+    clickOutside(e) {
+      this.sendWidgetAction("toggleLangList");
+    }
+
+  })
+
+  api.createWidget("lang-set", {
+    defaultState() {
+      let states = {
+        langListVisible: false
+      };
+      return states;
+    },
+
+    html(){
+
+      return h("div.select-kit.combo-box.set_div",
+        [helper.attach('lang-default') ,
+        helper.attach('lang-list-div')]
+      );
+    },
+
+    toggleLangList(){
+      this.state.langListVisible = !this.state.langListVisible;
+    }
+
+  })
+
+
+
 
   api.decorateWidget("header-buttons:before", helper => {
-    var html = []
-    const langs = JSON.parse(Discourse.SiteSettings.available_locales)
-    langs.map(v =>{
-      var item = helper.attach('lang-list',v) ;
-      html.push(item) 
-    })
-    return h("div.select-kit.combo-box.set_div",
-      [helper.attach('lang-default') ,
-      h("ul.select-kit-collection.set_ul",html)]
-    );
+    return helper.attach("lang-set");
   });
 }
 export default {
