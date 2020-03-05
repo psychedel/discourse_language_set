@@ -51,7 +51,7 @@ function initialize(api) {
       var html = []
       const langs = JSON.parse(Discourse.SiteSettings.available_locales)
       langs.map(v =>{
-        var item = helper.attach('lang-list',v);
+        var item = this.attach('lang-list',v);
         html.push(item) 
       })
       return h("ul.select-kit-collection.set_ul.menu-panel",html);
