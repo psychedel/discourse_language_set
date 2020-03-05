@@ -82,21 +82,13 @@ function initialize(api) {
     },
 
     toggleLangList(){
-      console.log("toggleLangList")
-      console.log("修改前langListVisible = "+ this.state.langListVisible)
       this.state.langListVisible = !this.state.langListVisible;
-      console.log("修改后langListVisible = "+ this.state.langListVisible)
-      this.toggleBodyScrolling(this.state.langListVisible);
     },
    
     clickOutside(e) {
-      console.log("clickOutside")
-      this.toggleLangList();
+      this.sendWidgetAction("toggleLangList");
     },
     html(attrs, state){
-      console.log("this.state.langListVisible = "+ this.state.langListVisible)
-      console.log("state.langListVisible = "+ state.langListVisible)
-
       const panels = [this.attach('lang-default',{langListVisible:state.langListVisible})];
       if(state.langListVisible){
       panels.push(
