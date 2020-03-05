@@ -75,6 +75,18 @@ function initialize(api) {
       return states;
     },
 
+    toggleLangList(){
+      console.log("toggleLangList")
+      console.log("修改前langListVisible = "+ this.state.langListVisible)
+      this.state.langListVisible = !this.state.langListVisible;
+      console.log("修改后langListVisible = "+ this.state.langListVisible)
+      this.toggleBodyScrolling(this.state.userVisible);
+    }
+    ,
+    clickOutside(e) {
+      console.log("clickOutside")
+      this.sendWidgetAction("toggleLangList");
+    },
     html(attrs, state){
       console.log("this.state.langListVisible = "+ this.state.langListVisible)
       console.log("state.langListVisible = "+ state.langListVisible)
@@ -83,18 +95,6 @@ function initialize(api) {
         this.attach('lang-list-div',{langListVisible:state.langListVisible})]
       );
     },
-
-    toggleLangList(){
-      console.log("toggleLangList")
-      console.log("修改前langListVisible = "+ this.state.langListVisible)
-      this.state.langListVisible = !this.state.langListVisible;
-      console.log("修改后langListVisible = "+ this.state.langListVisible)
-    }
-,
-    clickOutside(e) {
-      console.log("clickOutside")
-      this.sendWidgetAction("toggleLangList");
-    }
 
   })
 
