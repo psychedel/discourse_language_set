@@ -73,13 +73,13 @@ function initialize(api) {
   api.createWidget("lang-set", {
     defaultState() {
       let states = {
-        langListVisible: true
+        langListVisible: false
       };
       return states;
     },
 
     html(attrs, state){
-
+      console.log("this.state.langListVisible = "+ this.state.langListVisible)
       console.log("state.langListVisible = "+ state.langListVisible)
       return h("div.select-kit.combo-box.set_div",
         [this.attach('lang-default',{langListVisible:state.langListVisible}) ,
