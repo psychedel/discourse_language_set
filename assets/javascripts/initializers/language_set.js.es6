@@ -89,7 +89,7 @@ function initialize(api) {
     },
 
     clickOutside(e) {
-      this.sendWidgetAction("toggleLangList");
+      this.sendWidgetAction("closeLangList");
     },
     
     html(attrs, state){
