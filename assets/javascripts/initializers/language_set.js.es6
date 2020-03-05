@@ -63,10 +63,7 @@ function initialize(api) {
       }
     },
 
-    clickOutside(e) {
-      console.log("clickOutside")
-      this.sendWidgetAction("toggleLangList");
-    }
+    
 
   })
 
@@ -92,6 +89,11 @@ function initialize(api) {
       console.log("修改前langListVisible = "+ this.state.langListVisible)
       this.state.langListVisible = !this.state.langListVisible;
       console.log("修改后langListVisible = "+ this.state.langListVisible)
+    }
+
+    clickOutside(e) {
+      console.log("clickOutside")
+      this.sendWidgetAction("toggleLangList");
     }
 
   })
