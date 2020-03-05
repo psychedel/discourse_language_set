@@ -80,6 +80,7 @@ function initialize(api) {
 
     html(attrs, state){
 
+      console.log("state.langListVisible = "+ state.langListVisible)
       return h("div.select-kit.combo-box.set_div",
         [this.attach('lang-default',{langListVisible:state.langListVisible}) ,
         this.attach('lang-list-div',{langListVisible:state.langListVisible})]
@@ -88,7 +89,9 @@ function initialize(api) {
 
     toggleLangList(){
       console.log("toggleLangList")
+      console.log("修改前langListVisible = "+ this.state.langListVisible)
       this.state.langListVisible = !this.state.langListVisible;
+      console.log("修改后langListVisible = "+ this.state.langListVisible)
     }
 
   })
