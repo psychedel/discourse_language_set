@@ -41,12 +41,11 @@ function initialize(api) {
   api.createWidget("lang-default", {
     tagName: 'div.lang_default',
     buildKey: () => `lang_default`,
-
-
     html(){
       return h("span.set_span","中文");
     },
-    click(){
+    click(e){
+      e.preventDefault();
       this.sendWidgetAction("toggleLangList");
     }
 
