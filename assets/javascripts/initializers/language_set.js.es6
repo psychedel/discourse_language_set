@@ -80,7 +80,7 @@ function initialize(api) {
       return states;
     },
 
-    html(){
+    html(attrs, state){
 
       return h("div.select-kit.combo-box.set_div",
         [this.attach('lang-default',{langListVisible:state.langListVisible}) ,
