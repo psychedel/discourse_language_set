@@ -43,8 +43,11 @@ function initialize(api) {
       return h("span.set_span","中文");
     },
     click(e){
-      e.preventDefault();
-      this.sendWidgetAction("toggleLangList");
+      console.log(this.attrs)
+      if(!this.attrs.langListVisible){
+        this.sendWidgetAction("toggleLangList");
+      }
+      
     }
 
   })
