@@ -1,0 +1,4 @@
+plugins:
+  header_with_language_set:
+    default: true
+    client: true
