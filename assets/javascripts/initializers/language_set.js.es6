@@ -40,25 +40,31 @@ function initialize(api) {
       return h("span.set_span","中文");
     },
     click(){
-
+      this.sendWidgetAction("toggleLangList");
     }
 
   })
 
   api.createWidget("lang-list-div", {
-    html(){
+    html(attrs, state){
+      if(state.langListVisible){
+        var html = []
+        const langs = JSON.parse(Discourse.SiteSettings.available_locales)
+        langs.map(v =>{
+          var item = this.attach('lang-list',v);
+          html.push(item) 
+        })
+        return h("ul.select-kit-collection.set_ul.menu-panel",html);
+      }else{
+        return [];
+      }
       
-      var html = []
-      const langs = JSON.parse(Discourse.SiteSettings.available_locales)
-      langs.map(v =>{
-        var item = this.attach('lang-list',v);
-        html.push(item) 
-      })
-      return h("ul.select-kit-collection.set_ul.menu-panel",html);
 
     },
 
     clickOutside(e) {
+      alert("clickOutside")
+      console.log("clickOutside")
       this.sendWidgetAction("toggleLangList");
     }
 
@@ -67,7 +73,7 @@ function initialize(api) {
   api.createWidget("lang-set", {
     defaultState() {
       let states = {
-        langListVisible: false
+        langListVisible: true
       };
       return states;
     },
