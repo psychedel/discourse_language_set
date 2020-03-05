@@ -75,8 +75,8 @@ function initialize(api) {
     html(){
 
       return h("div.select-kit.combo-box.set_div",
-        [helper.attach('lang-default') ,
-        helper.attach('lang-list-div')]
+        [this.attach('lang-default') ,
+        this.attach('lang-list-div')]
       );
     },
 
