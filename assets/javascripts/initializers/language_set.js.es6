@@ -105,8 +105,29 @@ function initialize(api) {
 
 
 
+
+  createWidget('increment-button', {
+    tagName: 'button',
+
+    defaultState() {
+      return { clicks: 0 };
+    },
+
+    html(attrs, state) { 
+      return `Click me! ${state.clicks} clicks`;
+    },
+
+    click() {
+      this.state.clicks++;
+    }
+  });
+
+
+
   api.decorateWidget("header-buttons:before", helper => {
-    return helper.attach("lang-set");
+    //return helper.attach("lang-set");
+    return helper.attach("increment-button");
+
   });
 }
 export default {
