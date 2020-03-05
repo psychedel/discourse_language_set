@@ -7,13 +7,11 @@ function initialize(api) {
   if(!allow_user_locale || !currentUser) return;
     
   
-  alert(currentUser.get("username"))
-  alert(Discourse.User.current().get("username"))
   var username = currentUser.get("username");
 
   api.createWidget("lang-list", {
     tagName: 'li.lang_list',
-    buildKey: () => `lang_list`,
+    
 
     html(attrs){
       return h("li",{className:"set_li select-kit-row",lang:attrs.value},attrs.name);
@@ -40,11 +38,12 @@ function initialize(api) {
 
   api.createWidget("lang-default", {
     tagName: 'div.lang_default',
-    buildKey: () => `lang_default`,
+    
     html(){
       return h("span.set_span","中文");
     },
     click(){
+       
       this.sendWidgetAction("toggleLangList");
     }
 
@@ -52,7 +51,7 @@ function initialize(api) {
 
   api.createWidget("lang-list-div", {
     tagName: 'div.lang_list_div',
-    buildKey: () => `lang_list_div`,
+    
     html(attrs, state){
       var html = []
       const langs = JSON.parse(Discourse.SiteSettings.available_locales)
